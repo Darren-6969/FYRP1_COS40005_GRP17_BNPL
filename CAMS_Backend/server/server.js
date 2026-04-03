@@ -1,5 +1,5 @@
 const express = require('express');
-const sql = require('mssql');
+// const sql = require('mssql');
 const cors = require('cors');
 const multer = require('multer');
 const nodemailer = require('nodemailer');
