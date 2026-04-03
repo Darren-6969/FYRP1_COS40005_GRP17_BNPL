@@ -1,15 +1,12 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "./server/server.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/server/server.js"
-      }
-    ]
-  }
+  "version": 2,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/server/server.js" }
+  ],
+  "crons": [
+    {
+      "path": "/send_payment_reminders",
+      "schedule": "30 14 * * *"
+    }
+  ]
+}

@@ -5020,25 +5020,35 @@ app.post('/check-date-overlap/:propertyId', async (req, res) => {
 
 // GET unique category names
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+// Export app for Vercel (must be before any listen call)
+module.exports = app;
 
-// Schedule a daily job to send payment reminders
-cron.schedule('30 14 * * *', async () => {
-  console.log('Running scheduled payment reminder job...');
-  try {
-    const response = await fetch(`http://localhost:${port}/send_payment_reminders`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    });
+// Only start local server when not on Vercel
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+}
+
+// // Start the server
+// app.listen(port, () => {
+//   console.log(`Server running on http://localhost:${port}`);
+// });
+
+// // Schedule a daily job to send payment reminders
+// cron.schedule('30 14 * * *', async () => {
+//   console.log('Running scheduled payment reminder job...');
+//   try {
+//     const response = await fetch(`http://localhost:${port}/send_payment_reminders`, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       }
+//     });
     
-    const result = await response.json();
-    console.log('Scheduled job result:', result);
-  } catch (error) {
-    console.error('Scheduled payment reminder job failed:', error);
-  }
-});
+//     const result = await response.json();
+//     console.log('Scheduled job result:', result);
+//   } catch (error) {
+//     console.error('Scheduled payment reminder job failed:', error);
+//   }
+// });
