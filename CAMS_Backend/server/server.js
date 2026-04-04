@@ -5042,20 +5042,20 @@ if (process.env.NODE_ENV !== 'production') {
 //   console.log(`Server running on http://localhost:${port}`);
 // });
 
-// // Schedule a daily job to send payment reminders
-// cron.schedule('30 14 * * *', async () => {
-//   console.log('Running scheduled payment reminder job...');
-//   try {
-//     const response = await fetch(`http://localhost:${port}/send_payment_reminders`, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       }
-//     });
+// Schedule a daily job to send payment reminders
+cron.schedule('30 14 * * *', async () => {
+  console.log('Running scheduled payment reminder job...');
+  try {
+    const response = await fetch(`http://localhost:${port}/send_payment_reminders`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
     
-//     const result = await response.json();
-//     console.log('Scheduled job result:', result);
-//   } catch (error) {
-//     console.error('Scheduled payment reminder job failed:', error);
-//   }
-// });
+    const result = await response.json();
+    console.log('Scheduled job result:', result);
+  } catch (error) {
+    console.error('Scheduled payment reminder job failed:', error);
+  }
+});
