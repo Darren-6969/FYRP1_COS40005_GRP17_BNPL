@@ -99,7 +99,7 @@ app.use(cors({
   origin: [
     'https://fypbnpl.vercel.app',
     'http://localhost:5173',
-    'http://localhost:3000'
+    'http://localhost:8080'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
