@@ -2562,6 +2562,8 @@ app.post('/reservation/:userid', async (req, res) => {
   try {
     client = await pool.connect();
     
+    await client.query('BEGIN');
+    
     const customerResult = await client.query(
       `INSERT INTO reservation_customer_details 
        (rcfirstname, rclastname, rcemail, rcphoneno, rctitle)
