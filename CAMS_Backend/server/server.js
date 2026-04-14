@@ -4970,6 +4970,12 @@ app.post('/payment_success/:reservationid', async (req, res) => {
     await transporter.sendMail(customerMailOptions);
     await transporter.sendMail(operatorMailOptions);
 
+    // Update the reservation status to 'Paid' in the database
+    await client.query(
+      `UPDATE reservation SET reservationstatus = 'Paid' WHERE reservationid = $1`,
+      [reservationid]
+    );
+
     await client.query(
       `INSERT INTO book_and_pay_log 
        (logtime, log, userid)
