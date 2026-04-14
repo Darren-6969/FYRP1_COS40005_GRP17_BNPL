@@ -476,7 +476,7 @@ const PropertyDetails = () => {
         adults: bookingData.adults || 1,
         children: bookingData.children || 0,
         userid: parseInt(userid),
-        reservationstatus: isDateOverlapping ? 'Pending' : 'Accepted'
+        reservationstatus: 'Pending'
       };
 
       const createdReservation = await createReservation(reservationData);
