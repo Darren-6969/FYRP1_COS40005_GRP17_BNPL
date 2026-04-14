@@ -2578,7 +2578,7 @@ app.post('/reservation/:userid', async (req, res) => {
     const checkIn = new Date(checkindatetime);
     
    // This gives the admin 24 hours to handle the request before it expires
-let reservationblocktime = new Date(reservationDateTime.getTime() + 24 * 60 * 60 * 1000);
+let reservationblocktime = new Date(reservationDateTime.getTime() - 1000);
 
 // For last-minute bookings, ensure it doesn't expire AFTER they check in
 if (reservationblocktime > checkIn) {
